@@ -2,29 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WorkExperience;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function workExperiences(Request $request)
     {
-        $workExperiences = [
-            [
-                'company_name' => 'Company A',
-                'role' => 'Software Engineer',
-                'tenure' => '2018 Dec - 2020 Jan',
-            ],
-            [
-                'company_name' => 'Company B',
-                'role' => 'Software Engineer',
-                'tenure' => '2018 Dec - 2020 Jan',
-            ],
-            [
-                'company_name' => 'Company C',
-                'role' => 'Software Engineer',
-                'tenure' => '2018 Dec - 2020 Jan',
-            ]
-        ];
+        $workExperiences = (new WorkExperience())->getRecords();
 
         $companyName = $request->name ?? null;
 
@@ -32,7 +17,7 @@ class UserController extends Controller
             $workExperiences = array_filter(
                 $workExperiences,
                 function ($workExperience) use ($companyName) {
-                    return $workExperience['company_name'] == $companyName;
+                    return strtolower($workExperience['company_name']) == strtolower($companyName);
                 }
             );
         }

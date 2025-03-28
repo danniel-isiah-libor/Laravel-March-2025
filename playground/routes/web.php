@@ -103,4 +103,5 @@ Route::get('/request', function (Request $request) {
     dd($request->name);
 });
 
-Route::get('/work-experiences', [UserController::class, 'workExperiences'])->name('work-experiences');
+Route::get('/work-experiences', [UserController::class, 'workExperiences'])
+    ->name('work-experiences');
