@@ -2,30 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WorkExperience;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function workExperiences(Request $request)
     {
-            $workExperiences = [
-                [
-                    'company_name' => 'Company A',
-                    'role' => 'Admin',
-                    'tenure' => 'Jan 2023 to Present' 
-                ],
-                [
-                    'company_name' => 'Company B',
-                    'role' => 'IT Specialist',
-                    'tenure' => 'Jan 2021 to Present' 
-                ],
-                [
-                    'company_name' => 'Company A',
-                    'role' => 'HR',
-                    'tenure' => 'Jan 2020 to Present' 
-                ]
-        
-                ];
+                $workExperiences = (new WorkExperience())->getRecords();
         
                 $companyName =$request->name ?? null;
                 if($companyName){
@@ -45,7 +29,11 @@ class UserController extends Controller
                 }
                 $html.="</ul>";
         
-                return $html;
+                //return $html;
+                return view('work-experience',
+                [
+                    'data'=> $html
+                ]);
         
     }
 }
