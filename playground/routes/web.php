@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -101,3 +102,5 @@ Route::get('/request', function (Request $request) {
     // dd($request->all());
     dd($request->name);
 });
+
+Route::get('/work-experiences', [UserController::class, 'workExperiences'])->name('work-experiences');
