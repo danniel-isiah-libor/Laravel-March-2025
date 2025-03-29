@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use App\Models\WorkExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,18 +17,35 @@ class UserController extends Controller
 
         $itemsPerPage = $request->itemsPerPage ?? 2;
 
-        $workExperiences = WorkExperience::simplePaginate(2); // SELECT * FROM work_experiences
+        // $workExperiences = WorkExperience::with([
+        //     'user' => function ($query) {
+        //         // $query->where();
+        //     }
+        // ])
+        //     ->whereHas('user', function ($query) {
+        //         $query->where('id', 1);
+        //     })
+        //     ->toSql();
 
-        $companyName = $request->name ?? null;
+        $workExperiences = WorkExperience::where('work_experiences.user_id', 1)
+            ->select('users.name as username')
+            ->join('users', 'users.id', '=', 'work_experiences.user_id')
+            ->get();
 
-        if ($companyName) {
-            $workExperiences = array_filter(
-                $workExperiences,
-                function ($workExperience) use ($companyName) {
-                    return strtolower($workExperience['company_name']) == strtolower($companyName);
-                }
-            );
-        }
+        dd($workExperiences);
+
+        // ->simplePaginate(2); // SELECT * FROM work_experiences
+
+        // $companyName = $request->name ?? null;
+
+        // if ($companyName) {
+        //     $workExperiences = array_filter(
+        //         $workExperiences,
+        //         function ($workExperience) use ($companyName) {
+        //             return strtolower($workExperience['company_name']) == strtolower($companyName);
+        //         }
+        //     );
+        // }
 
         return view('work-experience', [
             'data' => $workExperiences
@@ -52,9 +70,24 @@ class UserController extends Controller
     {
         $validatedRequest = $request->validated();
 
-        dd($validatedRequest);
-
         // process register
+        User::create($validatedRequest);
+
+        // $user = new User();
+        // $user->name = $validatedRequest['name'];
+        // $user->email = $validatedRequest['email'];
+        // $user->password = $validatedRequest['password'];
+        // $user->save();
+
+        // User::insert([
+        //     [
+        //         'name' => $validatedRequest['name'],
+        //         'email' => $validatedRequest['email'],
+        //         'password' => bcrypt($validatedRequest['password']),
+        //         // 'created_at' => now(),
+        //         // 'updated_at' => now()
+        //     ]
+        // ]);
 
         return redirect()->route('home');
     }

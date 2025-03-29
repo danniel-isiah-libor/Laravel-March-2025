@@ -7,6 +7,7 @@
                 <h2>{{ $item->company_name }}</h2>
                 <p>{{ $item->role }}</p>
                 <p>{{ $item->start_date }} - {{ $item->end_date }}</p>
+                <p>User: {{ $item->user->name }}</p>
             </li>
         @endforeach
     </ul>

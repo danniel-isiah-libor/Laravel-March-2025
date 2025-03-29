@@ -48,12 +48,12 @@ class RegisterRequest extends FormRequest
                 // ->uncompromised()
                 // ->mixedCase()
             ],
-            'user_id' => [
-                'integer',
-                'required',
-                // 'unique:users',
-                // 'exists:users,id'
-            ]
+            // 'user_id' => [
+            //     'integer',
+            //     'required',
+            //     // 'unique:users',
+            //     // 'exists:users,id'
+            // ]
         ];
     }
 
@@ -69,7 +69,7 @@ class RegisterRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'role' => 'customer'
+            // 'role' => 'customer'
         ]);
     }
 }
