@@ -11,33 +11,12 @@ class UserController extends Controller
     {
         $workExperiences = (new WorkExperience())->getRecords();
 
-        $companyName = $request->name ?? null;
+        $workExperiences = WorkExperience::simplePaginate(2);  
 
-        if ($companyName) {
-            $workExperiences = array_filter(
-                $workExperiences,
-                function ($workExperience) use ($companyName) {
-                    return strtolower($workExperience['company_name']) == strtolower($companyName);
-                }
-            );
-        }
-
+        
         return view('work-experience', [
             'data' => $workExperiences
         ]);
 
-        // $html = "<ul>";
-
-        // foreach ($workExperiences as $workExperience) {
-        //     $html .= "<li>";
-        //     $html .= "<h2>" . $workExperience['company_name'] . "</h2>";
-        //     $html .= "<p>Role: " . $workExperience['role'] . "</p>";
-        //     $html .= "<p>Tenure: " . $workExperience['tenure'] . "</p>";
-        //     $html .= "</li>";
-        // }
-
-        // $html .= "</ul>";
-
-        // return $html;
     }
 }

@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class WorkExperience extends Model
 {
+    use HasFactory;
+
     public function getRecords()
     {
         $workExperiences = [

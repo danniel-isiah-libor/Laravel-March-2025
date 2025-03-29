@@ -45,4 +45,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function workExperiences()
+        {
+            
+            return $this->hasMany(WorkExperience::class);
+
+        }
+
 }

@@ -61,47 +61,21 @@ Route::prefix('/admin')->group(function () {
     });
 });
 
-Route::fallback(function () {
-    return "<h1> PAGE NOT FOUND </h1>";
-});
+// Route::fallback(function () {
+//     return "<h1> PAGE NOT FOUND </h1>";
+// });
 
-Route::get('/users/update/{id}/{name?}', function ($id, $name = "John") {
-    // updating user record...
-    return "User Updated for ID: " . $id . ' ' . $name;
-})->where('id', '[0-9]+');
-
-// Route::get('/users/update/2', function () {
+// Route::get('/users/update/{id}/{name?}', function ($id, $name = "John") {
 //     // updating user record...
-//     return "User Updated";
+//     return "User Updated for ID: " . $id . ' ' . $name;
+// })->where('id', '[0-9]+');
+
+// Route::get('/request', function (Request $request) {
+
+//     dd($request->name);
 // });
-
-// Route::get('/users/update/3', function () {
-//     // updating user record...
-//     return "User Updated";
-// });
-
-
-// Route::get('/profile', function () {
-//     //
-// })->name('show');
-
-// Route::post('/profile', function () {
-//     //
-// })->name('update');
-
-// Route::match(['get', 'post'], '/profile', function (Request $request) {
-//     if ($request->isMethod('get')) {
-//         // get
-//     } else {
-//         // post
-//     }
-// });
-
-Route::get('/request', function (Request $request) {
-    // dd($request->query('name', 'John'));
-    // dd($request->all());
-    dd($request->name);
-});
 
 Route::get('/work-experiences', [UserController::class, 'workExperiences'])
     ->name('work-experiences');
+
+Route::view('/register', 'register');
