@@ -2,30 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class WorkExperience extends Model
 {
-    public function getRecords()
-    {
-        $workExp = [
-            [
-                'company_name' => 'Amazon',
-                'role' => 'Software Engineer',
-                'duration' => 'January 2021 to December 2025'
-            ],
-            [
-                'company_name' => 'Netflix',
-                'role' => 'System Designer',
-                'duration' => 'January 2021 to December 2025'
-            ],
-            [
-                'company_name' => 'Google',
-                'role' => 'General Manager',
-                'duration' => 'January 2021 to December 2025'
-            ],
-        ];
+    use HasFactory;
 
-        return $workExp;
+    protected $table = 'work_experience';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'user_id',
+        'company_name',
+        'role',
+        'start_date',
+        'end_date',
+        'responsibilities',
+    ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

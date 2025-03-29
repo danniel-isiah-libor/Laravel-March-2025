@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -81,3 +84,14 @@ ROute::get('request', function (Request $request) {
 
 
 Route::get('/work-experiences', [UserController::class, 'workExperiences'])->name('work-experiences');
+
+Route::view('/register', 'register')->name('register');
+Route::view('/login', 'login')->name('login');
+Route::post('/register-user', [RegisterController::class, 'register'])->name('register-user');
+Route::post('/login-user', [RegisterController::class, 'login'])->name('login-user');
+
+Route::view('/','welcome')->name('home');
+
+Route::get('/logout', function() {
+    Auth::logout();
+});

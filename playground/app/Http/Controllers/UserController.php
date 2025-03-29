@@ -4,38 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WorkExperience;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    public function workExperiences(Request $request)
+    public function workExperiences(WorkExperience $model)
     {
+        // $data = $model->with([
+        //     'user'
+        // ])
+        // ->whereHas('user', function ($query) {
+        //     $query->where('id', 1);
+        // })->get();
 
-        $workExp = (new WorkExperience())->getRecords();
 
-        $companyName = $request->company ?? null;
-
-        if ($companyName) {
-            $workExp = array_filter(
-                $workExp,
-                function ($workExp) use ($companyName) {
-                    return $workExp['company_name'] == $companyName;
-                }
-            );
-        }
-
-        $html = "<ul>";
-
-        foreach ($workExp as $we) {
-            $html .= "<l1>";
-            $html .= "<h2>" . $we['company_name'] . "</h2>";
-            $html .= "<p>Role: " . $we['role'] . "</p>";
-            $html .= "<p>Duration: " . $we['duration'] . "</p>";
-            $html .= "</h2>";
-        }
-        $html .= "<ul>";
+        $data = $model
+            ->select('users.name as username', 'work_experience.*')
+            ->join('users', 'users.id', '=', 'work_experience.user_id')->get();
 
         return view('work-experience', [
-            'data' => $html,
+            'data' => $data,
         ]);
     }
 }
