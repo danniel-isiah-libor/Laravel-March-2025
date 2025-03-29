@@ -19,21 +19,21 @@ class UserController extends Controller
                 );
                 }
         
-                $html= "<ul>";
-                foreach ($workExperiences as $workExperience){
-                    $html .="<li>";
-                    $html .="<h2>".$workExperience['company_name']."</h2>";
-                    $html .="<p>Role: ".$workExperience['role']."</h2>";
-                    $html .="<p>Tenure: ".$workExperience['tenure']."</h2>";
-                    $html .="</li>";
-                }
-                $html.="</ul>";
+                // $html= "<ul>";
+                // foreach ($workExperiences as $workExperience){
+                //     $html .="<li>";
+                //     $html .="<h2>".$workExperience['company_name']."</h2>";
+                //     $html .="<p>Role: ".$workExperience['role']."</h2>";
+                //     $html .="<p>Tenure: ".$workExperience['tenure']."</h2>";
+                //     $html .="</li>";
+                // }
+                // $html.="</ul>";
         
                 //return $html;
                 return view('work-experience',
                 [
-                    'data'=> $html
-                ]);
+                    'data'=> $workExperiences
+                ]); 
         
     }
 }
