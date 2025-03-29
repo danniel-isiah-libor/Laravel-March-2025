@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -114,3 +115,10 @@ Route::view('/register', 'register')->name('show.register');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
 Route::view('/', 'welcome')->name('home');
+
+Route::view('/login', 'login')->name('show.login');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+
+Route::get('/logout', function () {
+    Auth::logout();
+});

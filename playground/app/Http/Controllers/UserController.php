@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Models\WorkExperience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
@@ -90,5 +93,33 @@ class UserController extends Controller
         // ]);
 
         return redirect()->route('home');
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $validatedRequest = $request->validated();
+
+        $user = User::whereEmail($validatedRequest['email'])->first();
+        Auth::login($user);
+        return redirect()->route('home');
+
+        if (Auth::attempt($validatedRequest)) {
+            // $user = User::whereEmail($validatedRequest['email'])->first();
+            // Auth::login($user);
+            // return redirect()->route('home');
+        } else {
+            // $user = User::whereEmail($validatedRequest['email'])->first();
+            // $user->update([
+            //     'failed_attempts' => $user->failed_attempts + 1
+            // ]);
+        }
+
+        // $user = User::whereEmail($validatedRequest['email'])->first();
+
+        // if (Hash::check($validatedRequest['password'], $user->password)) {
+        //     dd(true);
+        // } else {
+        //     dd(false);
+        // }
     }
 }
