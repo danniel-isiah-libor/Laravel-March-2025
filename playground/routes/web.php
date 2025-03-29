@@ -4,11 +4,19 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    // return view('welcome');
-    return "Hello World";
-});
+// Route::get('/', function () {
+//     // return view('welcome');
+//     return "Hello World";
+// });
 
+
+
+Route:: view('/register','register')->name('show.
+register');
+
+Route:: view('/','welcome')->name('home');
+Route:: view('/login','login')->name('show.login');
+Route::post('/register',[UserController::class, 'register'])->name('register');
 
 
 Route::prefix('/admin')->group(function () {
@@ -42,6 +50,7 @@ Route::get('/request', function (Request $request) {
     // dd($request->query('name', 'default'));
    
 });
+Route::get('/work-experiences', [UserController::class, 'workExperiences'])
+    ->name('work-experiences');
 
-Route::get('/work-experiences',[UserController::class, 'workExperiences'])
-->name('work-experiences');
+
