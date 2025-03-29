@@ -8,12 +8,14 @@ use Illuminate\View\Component;
 
 class WorkExperience extends Component
 {
+    protected $data;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -21,6 +23,17 @@ class WorkExperience extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.work-experience');
+        $this->data = collect($this->data)->map(function ($item) {
+            return [
+                'company_name' => strtoupper($item['company_name']),
+                'role' => $item['role'],
+                'tenure' => $item['tenure'],
+                'status' => 'this is a status'
+            ];
+        })->toArray();
+
+        return view('components.work-experience', [
+            'data' => $this->data
+        ]);
     }
 }

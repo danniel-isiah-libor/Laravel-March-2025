@@ -1,3 +1,5 @@
+{{-- @props(['data']) --}}
+
 <div>
-    This is a sub component
+    {{ json_encode($data) }}
 </div>
