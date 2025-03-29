@@ -23,14 +23,16 @@ class WorkExperience extends Component
      */
     public function render(): View|Closure|string
     {
-        $this->data = collect($this->data)->map(function ($item) {
-            return [
-                'company_name' => strtoupper($item['company_name']),
-                'role' => $item['role'],
-                'tenure' => $item['tenure'],
-                'status' => 'this is a status'
-            ];
-        })->toArray();
+        // $this->data = collect($this->data)->map(function ($item) {
+        //     return [
+        //         'company_name' => strtoupper($item['company_name']),
+        //         'role' => $item['role'],
+        //         'tenure' => $item['tenure'],
+        //         'status' => 'this is a status',
+        //         'start_date' => $item['start_date'],
+        //         'end_date' => $item['end_date'],
+        //     ];
+        // })->toArray();
 
         return view('components.work-experience', [
             'data' => $this->data
