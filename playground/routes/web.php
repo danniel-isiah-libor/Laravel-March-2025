@@ -4,13 +4,13 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    // return view('welcome');
+// Route::get('/', function () {
+//     // return view('welcome');
 
-    // return "<h1 style='color: red'>
-    // Hello Laravel </h1>";
-    return "<script> alert('Hello Laravel') </script>";
-});
+//     // return "<h1 style='color: red'>
+//     // Hello Laravel </h1>";
+//     return "<script> alert('Hello Laravel') </script>";
+// });
 
 Route::get('/admin/users/update/1', function () {
     return "Admin Page";

@@ -15,4 +15,6 @@
     {{-- {!! $data !!} --}}
 
     <x-work-experience :data="$data"/>
+
+    {{ $data->links() }}
 </x-layout>

@@ -3,22 +3,11 @@
 <div>
     <ul>
         @foreach($data as $item)
-        <li>
-<p>
-    {{$item['company_name']}}
-</p>
-<li>
-<p>
-{{$item['role']}}
-</p>
-<li>
-<p>
-{{$item['start_date']}} - {{$item['end_date']}}
-
-</p>
-@endforeach
-
-    </li>
+            <li style="border-bottom: 1px solid red; margin-bottom: 10px">
+                <h2>{{ $item->company_name }}</h2>
+                <p>{{ $item->role }}</p>
+                <p>{{ $item->start_date }} - {{ $item->end_date }}</p>
+            </li>
+        @endforeach
     </ul>
-    <!-- {{ json_encode($data) }} -->
 </div>

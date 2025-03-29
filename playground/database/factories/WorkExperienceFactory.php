@@ -14,7 +14,7 @@ class WorkExperienceFactory extends Factory
     use HasFactory;
     /**
      * Define the model's default state.
-     *
+     *ork
      * @return array<string, mixed>
      */
     public function definition(): array

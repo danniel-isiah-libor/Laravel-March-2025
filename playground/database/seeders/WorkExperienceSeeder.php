@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\WorkExperience;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\WorkExperience;
 
 class WorkExperienceSeeder extends Seeder
 {

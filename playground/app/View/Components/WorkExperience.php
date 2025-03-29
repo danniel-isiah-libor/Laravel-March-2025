@@ -1,25 +1,43 @@
 <?php
 
-namespace App\View\Components;
+namespace App\Models;
 
-use Closure;
-use Illuminate\Contracts\View\View;
-use Illuminate\View\Component;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class WorkExperience extends Component
+class WorkExperience extends Model
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
-    {
-         }
+    use HasFactory;
 
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
+    public function getRecords()
     {
-        return view('components.work-experience');
+        $workExperiences = [
+            [
+                'company_name' => 'Company A',
+                'role' => 'Software Engineer',
+                'tenure' => '2018 Dec - 2020 Jan',
+            ],
+            [
+                'company_name' => 'Company B',
+                'role' => 'Software Engineer',
+                'tenure' => '2018 Dec - 2020 Jan',
+            ],
+            [
+                'company_name' => 'Company C',
+                'role' => 'Software Engineer',
+                'tenure' => '2018 Dec - 2020 Jan',
+            ]
+        ];
+
+        /**
+         * SELECT * FROM work_experiences .....
+         */
+
+        return $workExperiences;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
